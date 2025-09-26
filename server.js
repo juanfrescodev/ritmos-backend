@@ -4,8 +4,17 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: 'https://juanfrescodev.github.io',
+  methods: ['GET', 'POST'],
+}));
+
 app.use(express.json());
+
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
 
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
@@ -15,9 +24,6 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use('/api/scores', require('./routes/scores'));
 
-app.get('/ping', (req, res) => {
-  res.status(200).send('pong');
-});
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
+
