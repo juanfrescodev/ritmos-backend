@@ -15,5 +15,9 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use('/api/scores', require('./routes/scores'));
 
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
