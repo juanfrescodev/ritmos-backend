@@ -11,16 +11,14 @@ exports.createScore = async (req, res) => {
   }
 };
 
-exports.getTopScores = async (req, res) => {
+exports.createScore = async (req, res) => {
   try {
-    const { ritmo, modo } = req.query;
-    const filtro = {};
-    if (ritmo) filtro.ritmo = ritmo;
-    if (modo) filtro.modo = modo;
-
-    const topScores = await Score.find(filtro).sort({ puntaje: -1 }).limit(10);
-    res.json(topScores);
+    console.log("Recibido:", req.body); // 👈 esto
+    const nuevoScore = new Score(req.body);
+    await nuevoScore.save();
+    res.status(201).json({ success: true });
   } catch (err) {
+    console.error("Error al guardar score:", err.message); // 👈 y esto
     res.status(500).json({ error: err.message });
   }
 };

@@ -1,3 +1,4 @@
+//scores.js
 const express = require('express');
 const router = express.Router();
 const { createScore, getTopScores } = require('../controllers/scoresController');
