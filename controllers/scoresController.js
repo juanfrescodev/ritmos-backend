@@ -1,3 +1,4 @@
+//scores.Controller.js
 const Score = require('../models/Score');
 
 exports.createScore = async (req, res) => {
@@ -12,7 +13,12 @@ exports.createScore = async (req, res) => {
 
 exports.getTopScores = async (req, res) => {
   try {
-    const topScores = await Score.find().sort({ puntaje: -1 }).limit(10);
+    const { ritmo, modo } = req.query;
+    const filtro = {};
+    if (ritmo) filtro.ritmo = ritmo;
+    if (modo) filtro.modo = modo;
+
+    const topScores = await Score.find(filtro).sort({ puntaje: -1 }).limit(10);
     res.json(topScores);
   } catch (err) {
     res.status(500).json({ error: err.message });
