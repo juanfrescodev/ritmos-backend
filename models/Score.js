@@ -8,9 +8,9 @@ const scoreSchema = new mongoose.Schema({
   ritmo: { type: String, required: true },
   modo: { type: String, required: true },
   fecha: { type: Date, default: Date.now },
-
-  // 🧠 Nuevos campos para análisis
   notaFinal: { type: Number, required: false },
   tendencia: { type: String, required: false },
-  erroresPorGolpe: { type: Object, required: false }, // ej: { dum: 3, tak: 1 }
+  erroresPorGolpe: { type: Object, required: false },
 });
+
+module.exports = mongoose.model('Score', scoreSchema);
