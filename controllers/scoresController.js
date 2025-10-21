@@ -56,7 +56,10 @@ exports.getTopScores = async (req, res) => {
 exports.getScoresByUser = async (req, res) => {
   try {
     const userId = req.params.id;
-    const scores = await Score.find({ userId }).sort({ fecha: -1 });
+    const mongoose = require('mongoose');
+    const scores = await Score.find({ userId: req.params.id }).sort({ fecha: -1 });
+
+
     res.json(scores);
   } catch (err) {
     console.error("❌ Error al obtener scores por usuario:", err.message);
