@@ -40,6 +40,8 @@ mongoose.connect(process.env.MONGO_URI, {
 // 📦 Rutas de puntajes
 app.use('/api/scores', require('./routes/scores'));
 app.use('/api', require('./routes/auth'));
+app.use("/api/sequencer-stats", require("./routes/sequencer"));
+
 
 // 🚀 Inicio del servidor
 const PORT = process.env.PORT || 5000;
