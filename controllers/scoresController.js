@@ -6,18 +6,21 @@ exports.createScore = async (req, res) => {
   try {
     console.log("📩 POST recibido:", req.body);
 
-    const { nombre, puntaje, ritmo, modo } = req.body;
+    const { nombre, userId, puntaje, ritmo, modo, notaFinal, tendencia, erroresPorGolpe } = req.body;
 
-    // Validación básica
     if (!nombre || !puntaje || !ritmo || !modo) {
       return res.status(400).json({ error: "Faltan campos requeridos" });
     }
 
     const nuevoScore = new Score({
       nombre,
+      userId,
       puntaje,
       ritmo,
       modo,
+      notaFinal,
+      tendencia,
+      erroresPorGolpe,
       fecha: new Date()
     });
 
@@ -45,6 +48,18 @@ exports.getTopScores = async (req, res) => {
     res.json(topScores);
   } catch (err) {
     console.error("❌ Error al obtener ranking:", err.message);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+// 📈 Obtener todos los puntajes de un usuario
+exports.getScoresByUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const scores = await Score.find({ userId }).sort({ fecha: -1 });
+    res.json(scores);
+  } catch (err) {
+    console.error("❌ Error al obtener scores por usuario:", err.message);
     res.status(500).json({ error: err.message });
   }
 };
