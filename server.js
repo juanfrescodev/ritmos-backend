@@ -1,3 +1,4 @@
+//server.js
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -38,6 +39,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // 📦 Rutas de puntajes
 app.use('/api/scores', require('./routes/scores'));
+app.use('/api', require('./routes/auth'));
 
 // 🚀 Inicio del servidor
 const PORT = process.env.PORT || 5000;
