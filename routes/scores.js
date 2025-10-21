@@ -1,7 +1,7 @@
 //scores.js
 const express = require('express');
 const router = express.Router();
-const { createScore, getTopScores } = require('../controllers/scoresController');
+const { createScore, getTopScores, getScoresByUser } = require('../controllers/scoresController');
 
 router.post('/', createScore);
 router.get('/top', getTopScores);
