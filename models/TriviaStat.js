@@ -1,3 +1,4 @@
+//triviastat.js
 const mongoose = require("mongoose");
 
 const triviaStatSchema = new mongoose.Schema({

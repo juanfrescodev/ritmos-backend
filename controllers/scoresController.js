@@ -57,7 +57,11 @@ exports.getScoresByUser = async (req, res) => {
   try {
     const userId = req.params.id;
     const mongoose = require('mongoose');
-    const scores = await Score.find({ userId: req.params.id }).sort({ fecha: -1 });
+    const scores = await Score.find({
+      userId: req.params.id,
+      modo: "practica" // ✅ solo sesiones de práctica
+    }).sort({ fecha: -1 });
+
 
 
     res.json(scores);
