@@ -8,7 +8,7 @@ exports.createScore = async (req, res) => {
 
     const { nombre, userId, puntaje, ritmos, modo, notaFinal, tendencia, erroresPorGolpe } = req.body;
 
-    if (!nombre || !puntaje || !ritmo || !modo) {
+    if (!nombre || !puntaje || !ritmos || !modo) {
       return res.status(400).json({ error: "Faltan campos requeridos" });
     }
 
