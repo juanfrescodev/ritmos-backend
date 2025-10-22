@@ -41,6 +41,7 @@ mongoose.connect(process.env.MONGO_URI, {
 app.use('/api/scores', require('./routes/scores'));
 app.use('/api', require('./routes/auth'));
 app.use("/api/sequencer-stats", require("./routes/sequencer"));
+app.use("/api/trivia-stats", require("./routes/trivia"));
 
 
 // 🚀 Inicio del servidor
