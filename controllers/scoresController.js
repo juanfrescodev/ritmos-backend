@@ -38,7 +38,7 @@ exports.getTopScores = async (req, res) => {
     const { ritmo, modo } = req.query;
     const filtro = {};
 
-    if (ritmo) filtro.ritmo = ritmo;
+    if (ritmo) filtro.ritmos = { $in: [ritmo] };
     if (modo) filtro.modo = modo;
 
     const topScores = await Score.find(filtro)
@@ -51,6 +51,7 @@ exports.getTopScores = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 // 📈 Obtener todos los puntajes de un usuario
 exports.getScoresByUser = async (req, res) => {
